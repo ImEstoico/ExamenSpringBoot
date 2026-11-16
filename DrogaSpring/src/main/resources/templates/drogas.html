@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!-- obligatorio poner el xmlns:th para que el html entienda las etiquetas th: de thymeleaf -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de DROGAS</title>
+</head>
+<body>
+<h1>Mis DROGAS</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Tipo</th>
+        <th>Duración del efecto (seg)</th>
+        <th>Rareza</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- th:each es un bucle for-each: por cada objeto de ${listadrogas} (el nombre que pusimos en mav.addObject) crea una fila <tr> y la llama "droga" -->
+    <tr th:each="droga : ${listadrogas}">
+        <!-- th:text escribe dentro del <td> el valor del atributo (llama a droga.getId(), droga.getNombre(), etc.) -->
+        <td th:text="${droga.id}"></td>
+        <td th:text="${droga.nombre}"></td>
+        <td th:text="${droga.tipo}"></td>
+        <td th:text="${droga.duracionEfecto}"></td>
+        <!-- como rarezaDTO es un objeto dentro de droga, entramos a su nombre con el punto: droga.rarezaDTO.nombre -->
+        <td th:text="${droga.rarezaDTO.nombre}"></td>
+        <td>
+            <!-- th:href con @{...} crea enlaces dinámicos: donde pone {id} mete el valor de ${droga.id} -->
+            <a th:href="@{/drogas/{id}(id=${droga.id})}">Ver</a> |
+            <!-- aqui le pasamos el id de la rareza para que abra el controlador de /rareza/{id} -->
+            <a th:href="@{/rareza/{id}(id=${droga.rarezaDTO.id})}">Ver Rareza</a> |
+            <a th:href="@{/drogas/update/{id}(id=${droga.id})}">Editar</a> |
+            <a th:href="@{/drogas/delete/{id}(id=${droga.id})}">Borrar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+<!-- enlaces fijos para ir al formulario de crear o cambiar a la tabla de rarezas -->
+<a th:href="@{/drogas/add}">Añadir nueva DROGA</a> |
+<a th:href="@{/rareza}">Ver lista de RAREZAS</a>
+</body>
+</html>

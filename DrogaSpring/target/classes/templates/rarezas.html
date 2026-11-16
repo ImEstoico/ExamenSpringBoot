@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de RAREZAS</title>
+</head>
+<body>
+<h1>Mis RAREZAS</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Porcentaje (%)</th>
+        <th>Nivel</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- recorremos ${listararezas} que nos manda RarezaController -->
+    <tr th:each="rareza : ${listararezas}">
+        <td th:text="${rareza.id}"></td>
+        <td th:text="${rareza.nombre}"></td>
+        <td th:text="${rareza.porcentaje}"></td>
+        <td th:text="${rareza.nivel}"></td>
+        <td>
+            <a th:href="@{/rareza/{id}(id=${rareza.id})}">Ver</a> |
+            <a th:href="@{/rareza/update/{id}(id=${rareza.id})}">Editar</a> |
+            <a th:href="@{/rareza/delete/{id}(id=${rareza.id})}">Borrar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+<a th:href="@{/rareza/add}">Añadir nueva RAREZA</a> |
+<a th:href="@{/drogas}">Volver a DROGAS</a>
+</body>
+</html>

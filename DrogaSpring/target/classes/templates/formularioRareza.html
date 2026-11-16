@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario Rareza</title>
+</head>
+<body>
+<h1>Datos de la Rareza</h1>
+
+<!-- enganchamos el form con el objeto "rareza" y lo mandamos por POST a /rareza/save -->
+<form th:action="@{/rareza/save}" th:object="${rareza}" method="post">
+
+    <!-- campo oculto con el ID (si es nueva vale 0 porque es int, si editamos trae su ID para machacarla) -->
+    <input type="hidden" th:field="*{id}" />
+
+    <p>
+        <label>Nombre:</label>
+        <input type="text" th:field="*{nombre}" required />
+    </p>
+
+    <p>
+        <label>Porcentaje:</label>
+        <!-- step="0.01" permite meter decimales porque porcentaje es float -->
+        <input type="number" step="0.01" th:field="*{porcentaje}" required />
+    </p>
+
+    <p>
+        <label>Nivel:</label>
+        <input type="number" th:field="*{nivel}" required />
+    </p>
+
+    <button type="submit">Guardar</button>
+    <a th:href="@{/rareza}">Cancelar</a>
+</form>
+</body>
+</html>

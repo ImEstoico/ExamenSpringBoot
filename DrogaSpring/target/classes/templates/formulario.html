@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulario Droga</title>
+</head>
+<body>
+<h1>Datos de la Droga</h1>
+
+<!-- th:action dice a qué ruta POST del controlador se envían los datos al darle a Guardar -->
+<!-- th:object="${droga}" engancha el formulario al objeto vacio (o relleno si es editar) que mandamos desde el controlador -->
+<form th:action="@{/drogas/save}" th:object="${droga}" method="post">
+
+  <!-- SUPER IMPORTANTE: campo oculto para el ID. Si es nueva va vacío (null), pero si estamos editando guarda el ID original para que el save() sepa cuál machacar y no cree otra repetida -->
+  <input type="hidden" th:field="*{id}" />
+
+  <p>
+    <label>Nombre:</label>
+    <!-- th:field="*{nombre}" hace dos cosas: si estamos editando escribe el valor actual en la cajita, y al enviar lo mete en droga.setNombre() -->
+    <input type="text" th:field="*{nombre}" required />
+  </p>
+
+  <p>
+    <label>Tipo:</label>
+    <input type="text" th:field="*{tipo}" required />
+  </p>
+
+  <p>
+    <label>Duración (seg):</label>
+    <input type="number" th:field="*{duracionEfecto}" required />
+  </p>
+
+  <p>
+    <label>Rareza:</label>
+    <!-- desplegable: guarda el ID elegido dentro de droga.rarezaDTO.id -->
+    <select th:field="*{rarezaDTO.id}" required>
+      <!-- recorremos la lista de rarezas: th:value es lo que se envía por detrás (el id) y th:text es lo que lee el usuario (el nombre) -->
+      <option th:each="r : ${listararezas}"
+              th:value="${r.id}"
+              th:text="${r.nombre}">
+      </option>
+    </select>
+  </p>
+
+  <button type="submit">Guardar</button>
+  <a th:href="@{/drogas}">Cancelar</a>
+</form>
+</body>
+</html>

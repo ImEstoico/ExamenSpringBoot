@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ver Rareza</title>
+</head>
+<body>
+<h1>Detalle de la Rareza</h1>
+
+<!-- mostramos cada atributo de la rareza que hemos buscado por ID -->
+<div>ID</div>
+<div th:text="${rareza.id}"></div>
+
+<div>NOMBRE</div>
+<div th:text="${rareza.nombre}"></div>
+
+<div>PORCENTAJE</div>
+<div th:text="${rareza.porcentaje}"></div>
+
+<div>NIVEL</div>
+<div th:text="${rareza.nivel}"></div>
+
+<br>
+<a th:href="@{/rareza}">Ir a lista de Rarezas</a> |
+<a th:href="@{/drogas}">Volver a Drogas</a>
+</body>
+</html>
+
+<!--
+CHULETA RAPIDA DE SÍMBOLOS EN THYMELEAF:
+1. ${...} (Dólar) -> Para leer variables que mandas desde el Controller con mav.addObject("nombre", objeto). Ej: ${listadrogas}, ${droga.nombre}.
+2. *{...} (Asterisco) -> Solo se usa DENTRO de un <form th:object="${droga}">. Sirve para atar los inputs a los atributos de ese objeto sin repetir "droga." todo el rato. Ej: th:field="*{nombre}" equivale a droga.nombre.
+3. @{...} (Arroba) -> Siempre para rutas y enlaces (th:href y th:action). Si lleva variable se pone entre llaves y luego entre paréntesis se le da el valor: @{/drogas/delete/{id}(id=${droga.id})}.
+-->

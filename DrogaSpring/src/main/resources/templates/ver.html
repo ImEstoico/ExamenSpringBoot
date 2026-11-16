@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ver Droga</title>
+</head>
+<body>
+<h1>Detalle de la Droga</h1>
+
+<!-- sacamos los datos del objeto "droga" que metimos en el mav.addObject("droga", droga) del controlador -->
+<div>ID</div>
+<div th:text="${droga.id}"></div>
+
+<div>NOMBRE</div>
+<div th:text="${droga.nombre}"></div>
+
+<div>TIPO</div>
+<div th:text="${droga.tipo}"></div>
+
+<div>DURACIÓN</div>
+<div th:text="${droga.duracionEfecto}"></div>
+
+<div>RAREZA</div>
+<div th:text="${droga.rarezaDTO.nombre}"></div>
+
+<br>
+<a th:href="@{/drogas}">Volver a Drogas</a>
+</body>
+</html>
